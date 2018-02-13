@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- Robot_Localization -->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+        <rosparam command="load" file="$(find rugby)/config/robot_localization_param.yaml" />
+        <remap from="/odometry/filtered" to="/rugby/odom_ekf"/>
+    </node>
+
+    <node pkg="tf" type="static_transform_publisher" name="odom2odomc_ombined" args="0 0 0 0 0 0 odom_combined odom 10" />
+</launch>

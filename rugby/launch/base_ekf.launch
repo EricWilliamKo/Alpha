@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Whether to use new ekf node or not -->
+    <arg name="new_ekf" />
+
+    <!-- urdf xml robot description loaded on the Parameter Server-->
+	<param name="robot_description" command="$(find xacro)/xacro '$(find rugby)/modeldescription/urdf/rugby.xacro'" />
+	
+	<!-- Robot parameters -->
+	<param name="wheelSeparation" value="0.245"></param>
+	<param name="wheelRadius" value="0.0615"></param>
+	<param name="rate" value="10"></param>  
+	
+	<!-- Starting Joint state publisher node which will publish the joint values -->
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	<!-- Starting robot state publisher -->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+	<param name="publish_frequency" type="double" value="50.0"></param>
+	</node>
+		
+	<param name="EKF" value="True"></param> 
+	<node name="rugby_base" pkg="rugby" type="base.py" output="screen"/>
+
+	<node pkg="topic_tools" type="relay" name="relay_cmd_vel" args="andbot/cmd_vel rugby/cmd_vel"/>
+	<node pkg="topic_tools" type="relay" name="relay_current_position" args="rugby/current_position andbot/current_position"/>
+ 	 
+ 	<!-- Starting robot_pose_ekf nodes -->
+	<include unless="$(arg new_ekf)" file="$(find rugby)/launch/robot_pose_ekf.launch" />
+
+    <!-- Starting robot_localization node -->
+    <include if="$(arg new_ekf)" file="$(find rugby)/launch/robot_localization_ekf.launch" />
+</launch>

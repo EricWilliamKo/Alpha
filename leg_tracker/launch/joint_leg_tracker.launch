@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<launch>
+	<!-- params -->
+	<arg name="odom_type" />
+  	<param name="forest_file" value="$(find leg_tracker)/config/trained_leg_detector_res=0.33.yaml" />
+ 	  <param name="scan_topic" value="/scan" />
+	  <param name="fixed_frame" value="$(arg odom_type)"/>
+	  <!--RPLIDAR A1's scanning frequency reached 5.5 hz when sampling 360 points eachround. And it can be configured up to 10 hz maximum.-->
+	  <param name="scan_frequency" value="7.5"/>  
+	  <param name="max_detect_distance" value="5.0"/>
+	  <param name="max_detected_clusters" value="-1"/> 
+	  <param name="max_points_per_cluster" value="60"/>
+	  <param name="detection_threshold" value="0.15" />
+	  <param name="cluster_dist_euclid" value="0.13" />
+	  <param name="dist_travelled_together_to_initiate_leg_pair" value="0.7"/>
+	  <param name="confidence_percentile" value="0.8"/>
+	  <param name="max_std" value="0.6" /> 
+  
+  
+  <!-- run detect_leg_clusters -->  
+  <node pkg="leg_tracker" type="detect_leg_clusters" name="detect_leg_clusters" output="screen"/>
+
+  <!-- run joint_leg_tracker -->
+  <node pkg="leg_tracker" type="joint_leg_tracker.py" name="joint_leg_tracker" output="screen"/>
+ 
+   <!-- run local_occupancy_grid_mapping -->
+  <node pkg="leg_tracker" type="local_occupancy_grid_mapping" name="local_occupancy_grid_mapping" output="screen"/> 
+   
+</launch>
+

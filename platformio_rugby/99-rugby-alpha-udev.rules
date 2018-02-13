@@ -1,0 +1,12 @@
+# ttyUSB5
+KERNEL=="ttyUSB*", ATTRS{idProduct}=="6001", ATTRS{idVendor}=="0403", ATTRS{devpath}=="1.1.2.4", SYMLINK+="programmer"
+# ttyUSB1 (FTDI; U13 on RB)
+KERNEL=="ttyUSB*", ATTRS{idProduct}=="6001", ATTRS{idVendor}=="0403", ATTRS{devpath}=="1.1.3", SYMLINK+="mega_head"
+# ttyUSB2 (FTDI; U10 on RB)
+KERNEL=="ttyUSB*", ATTRS{idProduct}=="6001", ATTRS{idVendor}=="0403", ATTRS{devpath}=="1.1.4", SYMLINK+="mega_wheel"
+# ttyUSB3 (FTDI; U2 on RB)
+KERNEL=="ttyUSB*", ATTRS{idProduct}=="6001", ATTRS{idVendor}=="0403", ATTRS{devpath}=="1.1.2.2", SYMLINK+="328p_dock"
+# ttyUSB4 (FTDI; U4 on RB)
+KERNEL=="ttyUSB*", ATTRS{idProduct}=="6001", ATTRS{idVendor}=="0403", ATTRS{devpath}=="1.1.2.3", SYMLINK+="328p_avoid"
+# rplidar
+KERNEL=="ttyUSB*", ATTRS{idProduct}=="ea60", ATTRS{idVendor}=="10c4", ATTRS{devpath}=="1", SYMLINK+="rplidar"
