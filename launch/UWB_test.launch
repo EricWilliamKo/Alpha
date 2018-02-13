@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+<!-- map server for USB -->
+	<node name="map_server_uwb" pkg="map_server" type="map_server" args="$(find rugby)/map/map_amcl.yaml">
+        <remap from="map" to="map_amcl" />
+    </node>
+
+    <node name="UWB" pkg="rugby" type="UWB.py" output="screen"/>
+</launch>

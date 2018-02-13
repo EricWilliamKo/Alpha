@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<launch>
+	<!-- Launches sensor nodes -->
+	<include file="$(find rugby)/launch/rplidar.launch" />
+
+	<include file="$(find rugby)/launch/base.launch">
+	<arg name="EKF" value="true"/>
+	</include>
+	
+	<!-- Start gmapping nodes and its configurations -->
+	<include file="$(find rugby)/launch/includes/gmapping_ekf_config.launch.xml"/>
+
+	<!-- Start move_base node and its configuration -->
+	<include file="$(find rugby)/launch/includes/move_base_dwa_ekf.launch.xml"/>
+
+</launch>

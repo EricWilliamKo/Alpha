@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+	<include file="$(find rugby)/launch/base.launch"/>
+	<include file="$(find rugby)/launch/dwa_amcl.launch"/>
+	<node name="rugby_head" pkg="rugby" type="head.py" output="screen"/>
+		
+	<include file="$(find leg_tracker)/launch/joint_leg_tracker.launch">
+	<arg name="odom_type" value="odom"/>
+	</include>
+
+	<node name="follow_me" pkg="rugby" type="follow_me.py" output="screen"/>
+	<node name="autoDocking" pkg="rugby" type="autodocking.py" output="screen"/>
+</launch>

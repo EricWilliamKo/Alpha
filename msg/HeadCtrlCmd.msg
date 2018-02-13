@@ -1,0 +1,2 @@
+float32 PanCmdPos
+float32 TiltCmdPos
